@@ -7,8 +7,8 @@ class HomeScreen extends StatelessWidget {
 
 
 
-  void handleThumbnailPress(BuildContext context, Map<String, dynamic> item) {
-    Navigator.pushNamed(context, '/audiobook', arguments: item);
+  void handleThumbnailPress(BuildContext context, int itemIndex) {
+    Navigator.pushNamed(context, '/audiobook', arguments: {'audiobookIndex': itemIndex});
   }
 
   @override
@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                       child: AudiobookThumbnail(
                         title: audiobook['title'].toString(),
                         imageSource: AssetImage(audiobook['imageSource'].toString()),
-                        onPress: () => handleThumbnailPress(context, audiobook),
+                        onPress: () => handleThumbnailPress(context, index),
                       ),
                     );
                   },

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (_) => const LoginScreen(),
         '/homePage': (_) => const HomePage(),
-        '/audiobook': (_) => const AudiobookScreen(audiobook: {}),
+        '/audiobook': (_) => AudiobookScreen(),
         // '/home': (_) => const HomeScreen(),
         // '/account': (_) => const AccountScreen(),
       },

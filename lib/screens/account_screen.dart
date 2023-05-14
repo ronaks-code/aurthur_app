@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:aurthur_app/screens/login_screen.dart';
 
+Shader linearGradient = const LinearGradient(
+  colors: [Color(0xFFBD6DFA), Color(0xFFEE92D0),],
+).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  const AccountScreen({Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -90,21 +94,36 @@ class AccountScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   const SizedBox(height: 50),
-                  ElevatedButton(
-                    onPressed: handleLogout,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple,
-                      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  Container(
+                    height: 40.0,
+                    margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color(0xFFC58BE5),
+                          Color(0xFFFFB7FD),
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
                       ),
                     ),
-                    child: const Text(
-                      'Log Out',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                    child: ElevatedButton(
+                      onPressed: handleLogout,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        'Log Out',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
