@@ -61,8 +61,8 @@ class _AudiobookScreenState extends State<AudiobookScreen> {
 
   void restartAudio() {
   setState(() {
-    audioPlayer!.stop();
-    audioPlayer!.seek(const Duration(milliseconds: 0));
+    audioPlayer.stop();
+    audioPlayer.seek(const Duration(milliseconds: 0));
     isPlaying = false;
     selectedNarrator = 'Choose Narrator:';
   });
