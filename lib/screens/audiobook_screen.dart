@@ -1,450 +1,275 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_material_pickers/flutter_material_pickers.dart';
-// import 'package:audioplayers/audioplayers.dart';
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-
-// class AudiobookScreen extends StatefulWidget {
-//   final Map<String, dynamic> audiobook;
-
-//   const AudiobookScreen({super.key, required this.audiobook});
-
-//   @override
-//   _AudiobookScreenState createState() => _AudiobookScreenState();
-// }
-
-// class _AudiobookScreenState extends State<AudiobookScreen> {
-//   final player = AudioPlayer();
-//   bool isPlaying = false;
-//   String audioUri = "";
-//   late String selectedNarrator = "";
-//   late String selectedChapter = "";
-
-//   Future<void> playAudio(String? uri) async {
-//     await player.play(AssetSource(uri!));
-//     setState(() => isPlaying = true);
-//   }
-
-//   Future<void> stopAudio() async {
-//     player.stop();
-//     setState(() => isPlaying = false);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.audiobook['title']),
-//       ),
-//       body: Container(
-//         padding: const EdgeInsets.all(16),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.spaceAround,
-//           crossAxisAlignment: CrossAxisAlignment.stretch,
-//           children: [
-//             Expanded(
-//               child: Center(
-//                 child: Image.asset(
-//                   'assets/images/audiobook_cover.png',
-//                   height: 200,
-//                 ),
-//               ),
-//             ),
-//             Text(
-//               widget.audiobook['title'],
-//               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//               textAlign: TextAlign.center,
-//             ),
-//             Text(
-//               'By ${widget.audiobook['author']}',
-//               style: const TextStyle(fontSize: 16),
-//               textAlign: TextAlign.center,
-//             ),
-//             ElevatedButton(
-//             onPressed: () async {
-//               int index = 0;
-//               if (widget.audiobook['narrators'] != null) {
-//                 index = widget.audiobook['narrators'].indexWhere((narrator) => narrator['name'] == selectedNarrator);
-//                 if (index == -1) {
-//                   index = 0;
-//                 }
-//               }
-
-//               await showMaterialScrollPicker(
-//                 context: context,
-//                 title: 'Select Narrator:',
-//                 items: widget.audiobook['narrators']?.map((narrator) => narrator['name'])?.toList() ?? [],
-//                 selectedItem: index,
-//                 onChanged: (value) {
-//                   setState(() {
-//                     selectedNarrator = widget.audiobook['narrators']![value]['name'];
-//                     audioUri = widget.audiobook['narrators']!.firstWhere((narrator) => narrator['name'] == value)['audioUri'];
-//                   });
-//                   playAudio(audioUri);
-//                 },
-//               );
-//             },
-//             child: Text(selectedNarrator.isEmpty ? 'Choose Narrator' : selectedNarrator),
-//           ),
-//           ElevatedButton(
-//             onPressed: () async {
-//               int index = 0;
-//               if (widget.audiobook['chapters'] != null) {
-//                 index = widget.audiobook['chapters'].indexWhere((chapter) => chapter['name'] == selectedChapter);
-//                 if (index == -1) {
-//                   index = 0;
-//                 }
-//               }
-
-//               await showMaterialScrollPicker(
-//                 context: context,
-//                 title: 'Select Chapter:',
-//                 items: widget.audiobook['chapters']?.map((chapter) => chapter['name'])?.toList() ?? [],
-//                 selectedItem: index,
-//                 onChanged: (value) {
-//                   setState(() {
-//                     selectedChapter = widget.audiobook['chapters']![value]['name'];
-//                     audioUri = widget.audiobook['chapters']!.firstWhere((chapter) => chapter['name'] == value)['audioUri'];
-//                   });
-//                   playAudio(audioUri);
-//                 },
-//               );
-//             },
-//             child: Text(selectedChapter.isEmpty ? 'Choose Chapter' : selectedChapter),
-//           ),
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//               children: [
-//                 IconButton(
-//                   onPressed: isPlaying ? stopAudio : null,
-//                   icon: Icon(
-//                     isPlaying ? MaterialCommunityIcons.stop_circle_outline : MaterialCommunityIcons.play_circle_outline,
-//                     size: 48,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// import 'package:flutter/material.dart';
-// import 'package:audioplayers/audioplayers.dart';
-
-// class AudiobookScreen extends StatefulWidget {
-//   final dynamic audiobook;
-//   const AudiobookScreen({Key? key, required this.audiobook}) : super(key: key);
-
-//   @override
-//   _AudiobookScreenState createState() => _AudiobookScreenState();
-// }
-
-// class _AudiobookScreenState extends State<AudiobookScreen> {
-//   AudioPlayer? audioPlayer;
-//   bool isPlaying = false;
-
-//   Future<void> configureAudio() async {
-//     await AudioPlayer().stop();
-//   }
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     configureAudio();
-//   }
-
-//   @override
-//   void dispose() {
-//     audioPlayer?.stop();
-//     audioPlayer?.release();
-//     super.dispose();
-//   }
-
-//   Future<void> playAudio(String uri) async {
-//     if (audioPlayer != null) {
-//       await audioPlayer!.stop();
-//     }
-//     audioPlayer = AudioPlayer();
-//     await audioPlayer!.setUrl(uri);
-//     await audioPlayer!.play(audioPlayer!.getUrl());
-//     setState(() {
-//       isPlaying = true;
-//     });
-//     audioPlayer!.onPlayerCompletion.listen((event) {
-//       setState(() {
-//         isPlaying = false;
-//       });
-//     });
-//   }
-
-//   Future<void> stopAudio() async {
-//     if (audioPlayer != null) {
-//       await audioPlayer!.stop();
-//       setState(() {
-//         isPlaying = false;
-//       });
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.audiobook['title']),
-//       ),
-//       body: Column(
-//         crossAxisAlignment: CrossAxisAlignment.stretch,
-//         children: [
-//           Padding(
-//             padding: const EdgeInsets.symmetric(vertical: 24),
-//             child: ElevatedButton(
-//               onPressed: isPlaying
-//                   ? stopAudio
-//                   : () => playAudio(widget.audiobook['audioSource']),
-//               child: Text(
-//                 isPlaying ? 'Stop' : 'Play',
-//               ),
-//             ),
-//           ),
-//           Expanded(
-//             child: SingleChildScrollView(
-//               child: Padding(
-//                 padding: const EdgeInsets.all(16),
-//                 child: Text(
-//                   widget.audiobook['description'],
-//                   style: Theme.of(context).textTheme.bodyText1,
-//                 ),
-//               ),
-//             ),
-//           ),
-//           NarratorChoice(audiobook: widget.audiobook, playAudio: playAudio),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class NarratorChoice extends StatefulWidget {
-//   final dynamic audiobook;
-//   final Function(String) playAudio;
-//   const NarratorChoice(
-//       {Key? key, required this.audiobook, required this.playAudio})
-//       : super(key: key);
-
-//   @override
-//   _NarratorChoiceState createState() => _NarratorChoiceState();
-// }
-
-// class _NarratorChoiceState extends State<NarratorChoice> {
-//   late String selectedNarrator;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     selectedNarrator = 'Choose Narrator:';
-//   }
-
-//   void chooseNarrator(String narratorName, String audioUri) async {
-//     selectedNarrator = narratorName;
-//     setState(() {}); // Redraw the widget to reflect the selected narrator
-//     await widget.playAudio(audioUri);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 24),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.stretch,
-//         children: [
-//           Text(
-//             selectedNarrator,
-//             style: Theme.of(context).textTheme.headline6,
-//           ),
-//           Padding(
-//             padding: const EdgeInsets.symmetric(vertical: 16),
-//             child: SizedBox(
-//               height: 120,
-//               child: ListView.builder(
-//                 scrollDirection: Axis.horizontal,
-//                 itemCount: widget.audiobook['narrators'].length,
-//                 itemBuilder: (context, index) {
-//                   final narrator = widget.audiobook['narrators'][index];
-//                   return Padding(
-//                     padding: const EdgeInsets.symmetric(horizontal: 8),
-//                     child: GestureDetector(
-//                       onTap: () => chooseNarrator(
-//                           narrator['name'], narrator['audioUri']),
-//                       child: Column(
-//                         children: [
-//                           CircleAvatar(
-//                             backgroundImage: AssetImage(narrator['avatar']),
-//                             radius: 40,
-//                           ),
-//                           Text(narrator['name']),
-//                         ],
-//                       ),
-//                     ),
-//                   );
-//                 },
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
-import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import '/data/audiobooksData.dart';
 
 class AudiobookScreen extends StatefulWidget {
-  int audiobookIndex;
-  AudiobookScreen({Key? key, required this.audiobookIndex}) : super(key : key);
+  final int? audiobookIndex;
+
+  const AudiobookScreen({Key? key, required this.audiobookIndex})
+      : super(key: key);
 
   @override
-  _AudiobookScreenState createState() => _AudiobookScreenState(audiobookIndex);
+  _AudiobookScreenState createState() => _AudiobookScreenState();
 }
 
 class _AudiobookScreenState extends State<AudiobookScreen> {
-  int audiobookIndex;
-  _AudiobookScreenState(this.audiobookIndex);
-  final player = AudioPlayer();
+  AudioPlayer audioPlayer = AudioPlayer();
   bool isPlaying = false;
-  String audioUri = "";
-  late String selectedNarrator = "";
-  late String selectedChapter = "";
+  String selectedNarrator = "Choose Narrator:";
+  bool modalVisible = false;
 
-  Future<void> playAudio(String? uri) async {
-    if (uri == null) return; // add null check
-    await player.play(AssetSource(uri));
-    setState(() => isPlaying = true);
+  @override
+  void initState() {
+    super.initState();
+    configureAudio();
+  }
+
+  void configureAudio() async {
+    audioPlayer = AudioPlayer();
+    await audioPlayer.setReleaseMode(ReleaseMode.stop);
+    // Listen to the player state changes
+    audioPlayer.onPlayerStateChanged.listen((PlayerState playerState) {
+      if (playerState == PlayerState.stopped ||
+          playerState == PlayerState.completed) {
+        setState(() {
+          isPlaying = false;
+        });
+      } else if (playerState == PlayerState.playing) {
+        setState(() {
+          isPlaying = true;
+        });
+      }
+    });
+  }
+
+  void playAudio(String url) async {
+    // Stop the current audio
+    await stopAudio();
+    // Play the new audio
+    await audioPlayer.play(UrlSource(url));
+    setState(() {
+      isPlaying = true;
+    });
   }
 
   Future<void> stopAudio() async {
-    player.stop();
-    setState(() => isPlaying = false);
+    await audioPlayer.stop();
+    setState(() {
+      isPlaying = false;
+    });
+  }
+
+  void restartAudio() {
+  setState(() {
+    audioPlayer!.stop();
+    audioPlayer!.seek(const Duration(milliseconds: 0));
+    isPlaying = false;
+    selectedNarrator = 'Choose Narrator:';
+  });
+}
+
+
+  Future<void> pauseAudio() async {
+    if (isPlaying) {
+      await audioPlayer.pause();
+
+      setState(() {
+        isPlaying = false;
+      });
+    }
+  }
+
+  Future<void> resumeAudio() async {
+    if (!isPlaying) {
+      await audioPlayer.resume();
+
+      setState(() {
+        isPlaying = true;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    stopAudio();
   }
 
   @override
   Widget build(BuildContext context) {
+    final audiobook = audiobooksData[widget.audiobookIndex!];
+
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(widget.audiobook['title']),
+        title: const Text('Audiobook'),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFC58BE5),
+                Color(0xFFFFB7FD),
+                Color(0xFFA8C0EE),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: Center(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 280,
                 child: Image.asset(
-                  'assets/images/audiobook_cover.png',
-                  height: 200,
+                  audiobook['imageSource'].toString(),
+                  fit: BoxFit.cover,
                 ),
               ),
-            ),
-            Text(
-              widget.audiobook['title'],
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              'By ${widget.audiobook['author']}',
-              style: const TextStyle(fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                int index = 0;
-                if (widget.audiobook['narrators'] != null) {
-                  index = widget.audiobook['narrators'].indexWhere(
-                      (narrator) => narrator['name'] == selectedNarrator);
-                  if (index == -1) {
-                    index = 0;
-                  }
-                }
-
-                await showMaterialScrollPicker(
-                  context: context,
-                  title: 'Select Narrator:',
-                  items: widget.audiobook['narrators']
-                          ?.map((narrator) => narrator['name'])
-                          ?.toList() ??
-                      [],
-                  selectedItem: index,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedNarrator =
-                          widget.audiobook['narrators']![value]['name'];
-                      audioUri = widget.audiobook['narrators']!.firstWhere(
-                          (narrator) => narrator['name'] == value)['audioUri'];
-                    });
-                    playAudio(audioUri);
-                  },
-                );
-              },
-              child: Text(selectedNarrator.isEmpty
-                  ? 'Choose Narrator'
-                  : selectedNarrator),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                int index = 0;
-                if (widget.audiobook['chapters'] != null) {
-                  index = widget.audiobook['chapters'].indexWhere(
-                      (chapter) => chapter['name'] == selectedChapter);
-                  if (index == -1) {
-                    index = 0;
-                  }
-                }
-
-                await showMaterialScrollPicker(
-                  context: context,
-                  title: 'Select Chapter:',
-                  items: widget.audiobook['chapters']
-                          ?.map((chapter) => chapter['name'])
-                          ?.toList() ??
-                      [],
-                  selectedItem: index,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedChapter =
-                          widget.audiobook['chapters']![value]['name'];
-                      audioUri = widget.audiobook['chapters']!.firstWhere(
-                          (chapter) => chapter['name'] == value)['audioUri'];
-                    });
-                    playAudio(audioUri);
-                  },
-                );
-              },
-              child: Text(
-                  selectedChapter.isEmpty ? 'Choose Chapter' : selectedChapter),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: isPlaying ? stopAudio : null,
-                  icon: Icon(
-                    isPlaying
-                        ? MaterialCommunityIcons.stop_circle_outline
-                        : MaterialCommunityIcons.play_circle_outline,
-                    size: 48,
+              const SizedBox(height: 20.0),
+              Center(
+                child: Text(
+                  audiobook['title'].toString(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    height: 2,
+                    color: Colors.black,
+                    fontFamily: 'Zapfino',
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(height: 10.0),
+              Text(
+                'By ${audiobook['author'].toString()}',
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  color: Color.fromARGB(255, 122, 122, 122),
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              SizedBox(
+                height: 64.0,
+                child: Text(
+                  audiobook['description'].toString(),
+                  textAlign: TextAlign.center,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              DropdownButton<String>(
+                value: selectedNarrator,
+                icon: const Icon(Icons.arrow_drop_down),
+                iconSize: 24,
+                elevation: 16,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.black,
+                ),
+                underline: Container(
+                  height: 2,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFFA8C0EE),
+                        Color(0xFFEE92D0),
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                  ),
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedNarrator = newValue!;
+                  });
+                  // add playAudio funtion with null check
+                  playAudio(
+                    (audiobook['narrators'] as List<dynamic>).firstWhere(
+                        (element) =>
+                            element['name'].toString() ==
+                            selectedNarrator)['audioUri'],
+                  );
+                },
+                items: [    const DropdownMenuItem<String>(      value: 'Choose Narrator:',      child: Text(        'Choose Narrator:',        style: TextStyle(          color: Colors.grey,        ),      ),    ),    ...((audiobook['narrators'] as List<dynamic>)
+                      .map<DropdownMenuItem<String>>((dynamic value) {
+                    return DropdownMenuItem<String>(
+                      value: value['name'].toString(),
+                      child: Text(
+                        value['name'].toString(),
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    );
+                  }).toList()),
+                ],
+              ),
+              const SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => restartAudio(),
+                    child: ShaderMask(
+                      shaderCallback: (Rect rect) {
+                        return const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color(0xFFA8C0EE), 
+                            Color(0xFFFFB7FD)
+                          ],
+                        ).createShader(rect);
+                      },
+                      child: const Icon(
+                        Icons.restart_alt,
+                        size: 60.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20.0),
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: isPlaying ? pauseAudio : resumeAudio,
+                    child: ShaderMask(
+                      shaderCallback: (Rect rect) {
+                        return const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Color(0xFFA8C0EE), Color(0xFFFFB7FD)],
+                        ).createShader(rect);
+                      },
+                      child: isPlaying
+                          ? const Icon(
+                              Icons.pause,
+                              size: 60.0,
+                              color: Colors.white,
+                            )
+                          : const Icon(
+                              Icons.play_arrow,
+                              size: 60.0,
+                              color: Colors.white,
+                            ),
+                    ),
+                  ),
+                ],
+              ),
+
+            ],
+          ),
         ),
       ),
     );

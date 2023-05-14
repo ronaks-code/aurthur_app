@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:flutter_signin_button/button_list.dart';
+// import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_builder.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 Shader linearGradient = const LinearGradient(
-  colors: [Color(0xFFBD6DFA), Color(0xFFEE92D0),],
+  colors: [
+    Color(0xFFC58BE5),
+    Color(0xFFA8C0EE),
+    Color(0xFFFFB7FD),
+  ],
 ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
 class LoginScreen extends StatelessWidget {
@@ -54,8 +58,9 @@ class LoginScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.0),
                 gradient: const LinearGradient(
                   colors: [
-                    Color(0xFFBD6DFA),
-                    Color(0xFFEE92D0),
+                    Color(0xFFC58BE5),
+                    Color(0xFFFFB7FD),
+                    Color(0xFFA8C0EE),
                   ],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,

@@ -19,52 +19,58 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _pages.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 20,
-              color: Colors.black.withOpacity(.5),
-            ),
-          ],
-          gradient: const LinearGradient(
-            colors: [
-              Color(0xFFBD6DFA),
-              Color(0xFFEE92D0),
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
+    return WillPopScope(
+      onWillPop: () async => _selectedIndex != 0,
+      child: Scaffold(
+        body: Center(
+          child: _pages.elementAt(_selectedIndex),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 65.0, vertical: 10),
-          child: GNav(
-            gap: 8,
-            padding: const EdgeInsets.all(16),
-            backgroundColor: Colors.transparent,
-            color: Colors.blue[700],
-            activeColor: Colors.white,
-            tabBackgroundColor: Colors.blue.shade900.withOpacity(.3),
-            selectedIndex: _selectedIndex,
-            onTabChange: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            tabs: const [
-              GButton(
-                icon: Icons.home,
-                text: 'Home',
-              ),
-              GButton(
-                icon: Icons.person,
-                text: 'Profile',
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 20,
+                color: Colors.black.withOpacity(.5),
               ),
             ],
+            gradient: const LinearGradient(
+              colors: [
+                Color(0xFFBD6DFA),
+                Color(0xFFEE92D0),
+                Color(0xFFA8C0EE),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 65.0, vertical: 10),
+            child: GNav(
+              gap: 8,
+              padding: const EdgeInsets.all(16),
+              backgroundColor: Colors.transparent,
+              color: Colors.blue[700],
+              activeColor: Colors.white,
+              tabBackgroundColor: Colors.blue.shade900.withOpacity(.3),
+              selectedIndex: _selectedIndex,
+              textStyle: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              tabs: const [
+                GButton(
+                  icon: Icons.home,
+                  text: 'Home',
+                ),
+                GButton(
+                  icon: Icons.person,
+                  text: 'Profile',
+                ),
+              ],
+            ),
           ),
         ),
       ),

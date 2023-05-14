@@ -1,57 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:aurthur_app/components/audiobook_thumbnail.dart';
-import 'package:aurthur_app/data/audiobooksData.dart';
+import '/components/audiobook_thumbnail.dart';
+import '/data/audiobooksData.dart';
+import '/screens/audiobook_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-
+  const HomeScreen({Key? key}) : super(key: key);
 
   void handleThumbnailPress(BuildContext context, int itemIndex) {
-    Navigator.pushNamed(context, '/audiobook', arguments: {'audiobookIndex': itemIndex});
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => AudiobookScreen(audiobookIndex: itemIndex),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
-    double statusBarHeight = MediaQuery.of(context).padding.top;
-
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Library'),
+        automaticallyImplyLeading: false,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+              Color(0xFFA8C0EE),
+              Color(0xFFFFB7FD),
+              Color(0xFFC58BE5),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         top: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: 60.0 + statusBarHeight,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 20,
-                    color: Colors.black.withOpacity(.5),
-                  ),
-                ],
-                gradient: const LinearGradient(
-                  colors: [Color(0xFFBD6DFA), Color(0xFFEE92D0)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.0, 1.0],
-                  tileMode: TileMode.clamp
-                ),
-              ),
-              child: const Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 40.0),
-                  child: Text(
-                    'Library',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -68,10 +53,10 @@ class HomeScreen extends StatelessWidget {
                     final audiobook = audiobooksData[index];
 
                     return GestureDetector(
-                      // onTap: () => handleThumbnailPress(context, audiobook),
                       child: AudiobookThumbnail(
                         title: audiobook['title'].toString(),
-                        imageSource: AssetImage(audiobook['imageSource'].toString()),
+                        imageSource:
+                            AssetImage(audiobook['imageSource'].toString()),
                         onPress: () => handleThumbnailPress(context, index),
                       ),
                     );

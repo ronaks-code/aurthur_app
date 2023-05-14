@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:aurthur_app/screens/login_screen.dart';
 
-Shader linearGradient = const LinearGradient(
-  colors: [Color(0xFFBD6DFA), Color(0xFFEE92D0),],
-).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
-
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key }) : super(key: key);
+  const AccountScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +43,14 @@ class AccountScreen extends StatelessWidget {
                   ),
                 ],
                 gradient: const LinearGradient(
-                  colors: [Color(0xFFBD6DFA), Color(0xFFEE92D0)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0.0, 1.0],
+                  colors: [
+                    Color(0xFFC58BE5),
+                    Color(0xFFA8C0EE),
+                    Color(0xFFFFB7FD),
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  stops: [0.0, 0.3, 0.9],
                   tileMode: TileMode.clamp
                 ),
               ),
@@ -103,6 +103,7 @@ class AccountScreen extends StatelessWidget {
                         colors: [
                           Color(0xFFC58BE5),
                           Color(0xFFFFB7FD),
+                          Color(0xFFA8C0EE),  
                         ],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,

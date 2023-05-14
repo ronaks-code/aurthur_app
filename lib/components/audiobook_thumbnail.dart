@@ -5,7 +5,7 @@ class AudiobookThumbnail extends StatelessWidget {
   final ImageProvider imageSource;
   final Function onPress;
 
-  const AudiobookThumbnail({
+  const AudiobookThumbnail({super.key, 
     required this.title,
     required this.imageSource,
     required this.onPress,
