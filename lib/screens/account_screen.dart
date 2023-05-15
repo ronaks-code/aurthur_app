@@ -28,6 +28,7 @@ class AccountScreen extends StatelessWidget {
     double statusBarHeight = MediaQuery.of(context).padding.top;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF9F1F0),
       body: SafeArea(
         top: false,
         child: Column(

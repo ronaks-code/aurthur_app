@@ -100,7 +100,7 @@ class _AudiobookScreenState extends State<AudiobookScreen> {
     final audiobook = audiobooksData[widget.audiobookIndex!];
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFF9F1F0),
       appBar: AppBar(
         title: const Text('Audiobook'),
         flexibleSpace: Container(
@@ -201,7 +201,16 @@ class _AudiobookScreenState extends State<AudiobookScreen> {
                             selectedNarrator)['audioUri'],
                   );
                 },
-                items: [    const DropdownMenuItem<String>(      value: 'Choose Narrator:',      child: Text(        'Choose Narrator:',        style: TextStyle(          color: Colors.grey,        ),      ),    ),    ...((audiobook['narrators'] as List<dynamic>)
+                items: [    const DropdownMenuItem<String>(      
+                  value: 'Choose Narrator:',      
+                  child: Text(        
+                    'Choose Narrator:',        
+                    style: TextStyle(          
+                      color: Colors.grey,        
+                    ),      
+                  ),    
+                ),    
+                ...((audiobook['narrators'] as List<dynamic>)
                       .map<DropdownMenuItem<String>>((dynamic value) {
                     return DropdownMenuItem<String>(
                       value: value['name'].toString(),

@@ -10,17 +10,17 @@ const audiobooksData = [
       {
         'name': 'AI Joe Rogan',
         'audioUri':
-            'https://chwtmzflswazkjejksof.supabase.co/storage/v1/object/public/MVP_audio/rogan_20k_3.mp3?t=2023-05-04T00%3A02%3A07.663Z',
+            'https://kuaycmfjucypwmanbjbf.supabase.co/storage/v1/object/public/mvp-audio-files/rogan_20k_3.mp3?t=2023-05-15T01%3A29%3A30.506Z',
       },
       {
         'name': 'AI Morgan Freeman',
         'audioUri':
-            'https://chwtmzflswazkjejksof.supabase.co/storage/v1/object/public/MVP_audio/morgan_20k_3.mp3?t=2023-05-03T23%3A57%3A22.849Z',
+            'https://kuaycmfjucypwmanbjbf.supabase.co/storage/v1/object/public/mvp-audio-files/freeman_20k_3.mp3?t=2023-05-15T01%3A27%3A30.778Z',
       },
       {
         'name': 'AI Barack Obama',
         'audioUri':
-            'https://chwtmzflswazkjejksof.supabase.co/storage/v1/object/public/MVP_audio/obama_20k_3.mp3?t=2023-05-03T23%3A57%3A38.176Z',
+            'https://kuaycmfjucypwmanbjbf.supabase.co/storage/v1/object/public/mvp-audio-files/obama_20k_3.mp3?t=2023-05-15T01%3A28%3A55.068Z',
       },
     ],
   },
@@ -34,17 +34,17 @@ const audiobooksData = [
       {
         'name': 'AI Joe Rogan',
         'audioUri':
-            'https://chwtmzflswazkjejksof.supabase.co/storage/v1/object/public/MVP_audio/rogan_gg_5.mp3?t=2023-05-02T15%3A29%3A31.491Z',
+            'https://kuaycmfjucypwmanbjbf.supabase.co/storage/v1/object/public/mvp-audio-files/rogan_gg_5.mp3?t=2023-05-15T01%3A29%3A53.701Z',
       },
       {
         'name': 'AI Morgan Freeman',
         'audioUri':
-            'https://chwtmzflswazkjejksof.supabase.co/storage/v1/object/public/MVP_audio/freeman_gg_5.mp3?t=2023-05-02T15%3A29%3A05.229Z',
+            'https://kuaycmfjucypwmanbjbf.supabase.co/storage/v1/object/public/mvp-audio-files/freeman_gg_5.mp3?t=2023-05-15T01%3A28%3A42.789Z',
       },
       {
         'name': 'AI Barack Obama',
         'audioUri':
-            'https://chwtmzflswazkjejksof.supabase.co/storage/v1/object/public/MVP_audio/obama_gg_5.mp3?t=2023-05-02T15%3A29%3A19.641Z',
+            'https://kuaycmfjucypwmanbjbf.supabase.co/storage/v1/object/public/mvp-audio-files/obama_gg_5.mp3?t=2023-05-15T01%3A29%3A19.712Z',
       },
     ],
   },
@@ -58,17 +58,17 @@ const audiobooksData = [
       {
         'name': 'AI Joe Rogan',
         'audioUri':
-            'https://chwtmzflswazkjejksof.supabase.co/storage/v1/object/public/MVP_audio/rogan_aow_3.mp3?t=2023-05-02T15%3A28%3A18.394Z',
+            'https://kuaycmfjucypwmanbjbf.supabase.co/storage/v1/object/public/mvp-audio-files/rogan_aow_3.mp3?t=2023-05-15T01%3A29%3A42.563Z',
       },
       {
         'name': 'AI Morgan Freeman',
         'audioUri':
-            'https://chwtmzflswazkjejksof.supabase.co/storage/v1/object/public/MVP_audio/freeman_aow_3.mp3?t=2023-05-02T15%3A25%3A15.740Z',
+            'https://kuaycmfjucypwmanbjbf.supabase.co/storage/v1/object/public/mvp-audio-files/freeman_aow_3.mp3?t=2023-05-15T01%3A27%3A37.520Z',
       },
       {
         'name': 'AI Barack Obama',
         'audioUri':
-            'https://chwtmzflswazkjejksof.supabase.co/storage/v1/object/public/MVP_audio/obama_aow_3.mp3?t=2023-05-02T15%3A27%3A48.683Z',
+            'https://kuaycmfjucypwmanbjbf.supabase.co/storage/v1/object/public/mvp-audio-files/obama_aow_3.mp3?t=2023-05-15T01%3A29%3A07.277Z',
       },
     ],
   },
