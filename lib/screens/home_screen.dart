@@ -18,14 +18,15 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFF9F1F0),
       appBar: AppBar(
         title: const Text('Library'),
+        centerTitle: true,
         automaticallyImplyLeading: false,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-              Color(0xFFA8C0EE),
-              Color(0xFFFFB7FD),
-              Color(0xFFC58BE5),
+                Color(0xFFA8C0EE),
+                Color(0xFFFFB7FD),
+                Color(0xFFC58BE5),
               ],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
