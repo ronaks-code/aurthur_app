@@ -1,6 +1,8 @@
-import 'package:aurthur_app/screens/account_screen.dart';
-import 'package:aurthur_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import '/screens/account_screen.dart';
+import 'screens/creator_screen.dart';
+import '/screens/home_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,9 +14,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  static const List<Widget> _pages = <Widget>[
-    HomeScreen(),
-    AccountScreen(),
+  static  final List<Widget> _pages = <Widget>[
+    const HomeScreen(),
+    const CreatorScreen(),
+    AccountScreen(name: AppleIDAuthorizationScopes.fullName.toString(), email: AppleIDAuthorizationScopes.email.toString()),
   ];
 
   @override
@@ -64,6 +67,10 @@ class _HomePageState extends State<HomePage> {
                 GButton(
                   icon: Icons.home,
                   text: 'Home',
+                ),
+                GButton(
+                  icon: Icons.create,
+                  text: 'Create',
                 ),
                 GButton(
                   icon: Icons.person,

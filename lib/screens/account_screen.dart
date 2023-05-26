@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:aurthur_app/screens/login_screen.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  final String name;
+  final String email;
+  const AccountScreen({Key? key, required this.name, required this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,50 +27,38 @@ class AccountScreen extends StatelessWidget {
       );
     }
 
-    double statusBarHeight = MediaQuery.of(context).padding.top;
-
     return Scaffold(
       backgroundColor: const Color(0xFFF9F1F0),
+      appBar: AppBar(
+        title: const Text('Profile Information',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24.0,
+          ),
+        ),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFC58BE5),
+                Color(0xFFA8C0EE),
+                Color(0xFFFFB7FD),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              stops: [0.0, 0.3, 0.9],
+              tileMode: TileMode.clamp,
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         top: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: 60.0 + statusBarHeight,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 20,
-                    color: Colors.black.withOpacity(.5),
-                  ),
-                ],
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFFC58BE5),
-                    Color(0xFFA8C0EE),
-                    Color(0xFFFFB7FD),
-                  ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  stops: [0.0, 0.3, 0.9],
-                  tileMode: TileMode.clamp
-                ),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.only(top: 40.0),
-                child: Center(
-                  child: Text(
-                    'Profile Information',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
             const SizedBox(height: 50),
             Center(
               child: Column(
@@ -104,7 +94,7 @@ class AccountScreen extends StatelessWidget {
                         colors: [
                           Color(0xFFC58BE5),
                           Color(0xFFFFB7FD),
-                          Color(0xFFA8C0EE),  
+                          Color(0xFFA8C0EE),
                         ],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
@@ -114,7 +104,8 @@ class AccountScreen extends StatelessWidget {
                       onPressed: handleLogout,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),

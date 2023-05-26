@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "673282062865",
+    "firebase_url": "https://arthur-app-7ddf0-default-rtdb.firebaseio.com",
+    "project_id": "arthur-app-7ddf0",
+    "storage_bucket": "arthur-app-7ddf0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673282062865:android:630d7ba9b9a45cc24ecfb0",
+        "android_client_info": {
+          "package_name": "com.example.aurthur_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673282062865-7uhc4rp9dia4oc3n9s8al4ed3ma9qhvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9fv_tv8H1OZfpTK1u-x0pZAD2WymOxmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673282062865-7uhc4rp9dia4oc3n9s8al4ed3ma9qhvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

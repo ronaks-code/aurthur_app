@@ -49,6 +49,10 @@
 	<string>public.app-category.books</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>My app uses photos to display audiobook informatation and a gif.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To play back the audio that the user generated.</string>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>A medium to play back the audio that was generated.</string>
 	<key>UIStatusBarHidden</key>
 	<false/>
 </dict>

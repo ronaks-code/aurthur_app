@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
 import 'homepage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import '/firebase_options.dart';
 // import 'screens/audiobook_screen.dart';
 // import 'screens/account_screen.dart';
 // import 'screens/home_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 

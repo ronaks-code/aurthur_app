@@ -47,35 +47,45 @@ class _AudiobookScreenState extends State<AudiobookScreen> {
     await stopAudio();
     // Play the new audio
     await audioPlayer.play(UrlSource(url));
-    setState(() {
-      isPlaying = true;
-    });
+
+    if (mounted) {
+      setState(() {
+        isPlaying = true;
+      });
+    }
   }
 
   Future<void> stopAudio() async {
     await audioPlayer.stop();
-    setState(() {
-      isPlaying = false;
-    });
+
+    if (mounted) {
+      setState(() {
+        isPlaying = false;
+      });
+    }
   }
 
   void restartAudio() {
-  setState(() {
     audioPlayer.stop();
     audioPlayer.seek(const Duration(milliseconds: 0));
-    isPlaying = false;
-    selectedNarrator = 'Choose Narrator:';
-  });
-}
 
+    if (mounted) {
+      setState(() {
+        isPlaying = false;
+        selectedNarrator = 'Choose Narrator:';
+      });
+    }
+  }
 
   Future<void> pauseAudio() async {
     if (isPlaying) {
       await audioPlayer.pause();
 
-      setState(() {
-        isPlaying = false;
-      });
+      if (mounted) {
+        setState(() {
+          isPlaying = false;
+        });
+      }
     }
   }
 
@@ -83,17 +93,20 @@ class _AudiobookScreenState extends State<AudiobookScreen> {
     if (!isPlaying) {
       await audioPlayer.resume();
 
-      setState(() {
-        isPlaying = true;
-      });
+      if (mounted) {
+        setState(() {
+          isPlaying = true;
+        });
+      }
     }
   }
 
   @override
   void dispose() {
-    super.dispose();
     stopAudio();
+    super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +115,13 @@ class _AudiobookScreenState extends State<AudiobookScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF9F1F0),
       appBar: AppBar(
-        title: const Text('Audiobook'),
+        title: const Text(
+          'Audiobook',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24.0,
+          ),
+        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -201,16 +220,17 @@ class _AudiobookScreenState extends State<AudiobookScreen> {
                             selectedNarrator)['audioUri'],
                   );
                 },
-                items: [    const DropdownMenuItem<String>(      
-                  value: 'Choose Narrator:',      
-                  child: Text(        
-                    'Choose Narrator:',        
-                    style: TextStyle(          
-                      color: Colors.grey,        
-                    ),      
-                  ),    
-                ),    
-                ...((audiobook['narrators'] as List<dynamic>)
+                items: [
+                  const DropdownMenuItem<String>(
+                    value: 'Choose Narrator:',
+                    child: Text(
+                      'Choose Narrator:',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  ...((audiobook['narrators'] as List<dynamic>)
                       .map<DropdownMenuItem<String>>((dynamic value) {
                     return DropdownMenuItem<String>(
                       value: value['name'].toString(),
@@ -236,10 +256,7 @@ class _AudiobookScreenState extends State<AudiobookScreen> {
                         return const LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: [
-                            Color(0xFFA8C0EE), 
-                            Color(0xFFFFB7FD)
-                          ],
+                          colors: [Color(0xFFA8C0EE), Color(0xFFFFB7FD)],
                         ).createShader(rect);
                       },
                       child: const Icon(
@@ -276,7 +293,6 @@ class _AudiobookScreenState extends State<AudiobookScreen> {
                   ),
                 ],
               ),
-
             ],
           ),
         ),

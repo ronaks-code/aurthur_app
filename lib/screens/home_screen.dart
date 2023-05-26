@@ -17,7 +17,12 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF9F1F0),
       appBar: AppBar(
-        title: const Text('Library'),
+        title: const Text('Library',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24.0,
+          ),
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false,
         flexibleSpace: Container(
